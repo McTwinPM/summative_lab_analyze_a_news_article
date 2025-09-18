@@ -17,26 +17,23 @@ def main():
         print("6. Exit")
 
         choice = input("Enter your choice (1-6): ")
-
-        if choice == '1':
-            word = input("Enter the word to count: ")
-            count_specific_word(article, word)
-        elif choice == '2':
-            most_common_word(article)
-        elif choice == '3':
-            average_word_length(article)
-        elif choice == '4':
-            count_paragraphs(article)
-        elif choice == '5':
-            count_sentences(article)
-        elif choice == '6':
-            print("Exiting the program.")
-            break
-        else:
-            print("Invalid choice. Please try again.")
-   
-
-
+        match choice:
+            case '1':
+                word = input("Enter the word to count: ")
+                count_specific_word(article, word)
+            case '2':
+                identify_most_common_word(article)
+            case '3':
+                calculate_average_word_length(article)
+            case '4':
+                count_paragraphs(article)
+            case '5':
+                count_sentences(article)
+            case '6':
+                print("Exiting the program.")
+                break
+            case _:
+                print("Invalid choice. Please try again.")
 
     
 # Function to read the article
@@ -58,7 +55,7 @@ def count_specific_word(article, word):
     return count
 
 # Most common word in the article
-def most_common_word(article):
+def identify_most_common_word(article):
     words = article.split()
     word_count = Counter(words)
     most_common = word_count.most_common(1)
@@ -71,7 +68,7 @@ def most_common_word(article):
         return None
     
 # Average word length
-def average_word_length(article):
+def calculate_average_word_length(article):
     words = article.split()
     words = [w.strip(string.punctuation) for w in words]
     total_length = sum(len(w) for w in words)
@@ -88,7 +85,7 @@ def count_paragraphs(article):
 # Count number of sentences
 def count_sentences(article):
     sentences = re.split(r'[.!?]+', article)
-    sentences = [s for s in sentences if s.strip()]
+    # sentences = [s for s in sentences if s.strip()]
     print(f'The article contains {len(sentences)} sentences.')
     return len(sentences)
 
